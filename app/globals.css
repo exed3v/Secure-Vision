@@ -1,26 +1,315 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-soft: var(--primary-soft);
+  --color-primary-deep: var(--primary-deep);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-bordeaux: var(--bordeaux);
+  --color-bordeaux-foreground: var(--bordeaux-foreground);
+  --color-bordeaux-hover: var(--bordeaux-hover);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+
+  /* next/font */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display:
+    var(--font-manrope), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --shadow-soft:
+    0 1px 2px rgba(15, 41, 58, 0.04), 0 8px 24px -8px rgba(15, 41, 58, 0.08);
+
+  --shadow-elevated:
+    0 4px 12px rgba(15, 41, 58, 0.06), 0 24px 48px -16px rgba(15, 41, 58, 0.16);
+
+  --shadow-glow-primary: 0 24px 64px -24px
+    color-mix(in oklab, var(--primary) 60%, transparent);
+
+  --shadow-glow-bordeaux: 0 16px 40px -12px
+    color-mix(in oklab, var(--bordeaux) 55%, transparent);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  --radius: 0.875rem;
+
+  /* Base — white & cool light greys */
+  --background: oklch(0.995 0.002 240);
+  --foreground: oklch(0.22 0.04 230);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.22 0.04 230);
+
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.22 0.04 230);
+
+  /* Primary — Petroleum Blue */
+  --primary: oklch(0.32 0.055 230);
+  --primary-foreground: oklch(0.99 0.003 240);
+  --primary-soft: oklch(0.92 0.018 230);
+  --primary-deep: oklch(0.22 0.045 230);
+
+  /* Bordeaux — CTA only */
+  --bordeaux: oklch(0.46 0.13 25);
+  --bordeaux-foreground: oklch(0.99 0.003 240);
+  --bordeaux-hover: oklch(0.4 0.135 25);
+
+  --secondary: oklch(0.965 0.008 235);
+  --secondary-foreground: oklch(0.28 0.045 230);
+
+  --muted: oklch(0.965 0.008 235);
+  --muted-foreground: oklch(0.5 0.025 235);
+
+  --accent: oklch(0.95 0.015 230);
+  --accent-foreground: oklch(0.28 0.045 230);
+
+  --destructive: oklch(0.55 0.21 27);
+  --destructive-foreground: oklch(0.99 0.003 240);
+
+  --border: oklch(0.92 0.01 235);
+  --input: oklch(0.92 0.01 235);
+  --ring: oklch(0.32 0.055 230);
+}
+
+.dark {
+  --background: oklch(0.16 0.025 230);
+  --foreground: oklch(0.97 0.005 240);
+
+  --card: oklch(0.2 0.035 230);
+  --card-foreground: oklch(0.97 0.005 240);
+
+  --popover: oklch(0.2 0.035 230);
+  --popover-foreground: oklch(0.97 0.005 240);
+
+  --primary: oklch(0.78 0.05 230);
+  --primary-foreground: oklch(0.18 0.035 230);
+  --primary-soft: oklch(0.26 0.04 230);
+  --primary-deep: oklch(0.14 0.03 230);
+
+  --bordeaux: oklch(0.55 0.14 25);
+  --bordeaux-foreground: oklch(0.99 0.003 240);
+  --bordeaux-hover: oklch(0.5 0.14 25);
+
+  --secondary: oklch(0.26 0.04 230);
+  --secondary-foreground: oklch(0.97 0.005 240);
+
+  --muted: oklch(0.26 0.04 230);
+  --muted-foreground: oklch(0.7 0.02 235);
+
+  --accent: oklch(0.26 0.04 230);
+  --accent-foreground: oklch(0.97 0.005 240);
+
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.78 0.05 230);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ============================================
+   UTILITIES
+   ============================================ */
+
+@utility container-px {
+  padding-inline: 1.25rem;
+
+  @media (min-width: 768px) {
+    padding-inline: 2rem;
+  }
+
+  @media (min-width: 1280px) {
+    padding-inline: 3rem;
+  }
+}
+
+@utility glass {
+  background: color-mix(in oklab, var(--background) 70%, transparent);
+  backdrop-filter: saturate(160%) blur(14px);
+  -webkit-backdrop-filter: saturate(160%) blur(14px);
+  border: 1px solid color-mix(in oklab, var(--border) 80%, transparent);
+}
+
+@utility glass-dark {
+  background: color-mix(in oklab, var(--primary-deep) 55%, transparent);
+  backdrop-filter: saturate(160%) blur(14px);
+  -webkit-backdrop-filter: saturate(160%) blur(14px);
+  border: 1px solid color-mix(in oklab, white 12%, transparent);
+}
+
+@utility text-balance {
+  text-wrap: balance;
+}
+
+@utility shadow-soft {
+  box-shadow: var(--shadow-soft);
+}
+
+@utility shadow-elevated {
+  box-shadow: var(--shadow-elevated);
+}
+
+@utility shadow-glow-bordeaux {
+  box-shadow: var(--shadow-glow-bordeaux);
+}
+
+@utility bg-grid {
+  background-image:
+    linear-gradient(
+      to right,
+      color-mix(in oklab, var(--primary) 8%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      color-mix(in oklab, var(--primary) 8%, transparent) 1px,
+      transparent 1px
+    );
+
+  background-size: 56px 56px;
+}
+
+@utility bg-hero-gradient {
+  background:
+    radial-gradient(
+      60% 80% at 80% 10%,
+      color-mix(in oklab, var(--bordeaux) 18%, transparent),
+      transparent 60%
+    ),
+    radial-gradient(
+      70% 90% at 10% 100%,
+      color-mix(in oklab, var(--primary) 40%, transparent),
+      transparent 65%
+    ),
+    linear-gradient(180deg, oklch(0.2 0.045 230) 0%, oklch(0.12 0.03 230) 100%);
+}
+
+@utility reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  animation: reveal-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@utility reveal-delay-1 {
+  animation-delay: 0.08s;
+}
+
+@utility reveal-delay-2 {
+  animation-delay: 0.16s;
+}
+
+@utility reveal-delay-3 {
+  animation-delay: 0.24s;
+}
+
+@utility reveal-delay-4 {
+  animation-delay: 0.32s;
+}
+
+@utility reveal-delay-5 {
+  animation-delay: 0.4s;
+}
+
+@keyframes reveal-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@utility float-slow {
+  animation: float-slow 6s ease-in-out infinite;
+}
+
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--bordeaux) 55%, transparent);
+  }
+
+  70% {
+    box-shadow: 0 0 0 18px color-mix(in oklab, var(--bordeaux) 0%, transparent);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--bordeaux) 0%, transparent);
+  }
+}
+
+@utility pulse-ring {
+  animation: pulse-ring 2.2s ease-out infinite;
+}
+
+/* Accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal,
+  .float-slow,
+  .pulse-ring {
+    animation: none !important;
+    transform: none !important;
+  }
 }
